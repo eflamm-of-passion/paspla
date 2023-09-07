@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component
 class SchedulerService {
 
     @Autowired
-    private lateinit var rulesService: RuleService
+    private lateinit var rulesService: JobService
 
     @Scheduled(fixedDelay = 1000)
     fun triggerAtInterval() {
-        rulesService.processRules()
+        rulesService.processJobs()
     }
 }
 

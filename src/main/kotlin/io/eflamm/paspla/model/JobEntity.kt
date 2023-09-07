@@ -5,7 +5,7 @@ import java.util.*
 
 @Entity
 @Table(name="rules")
-data class RuleEntity(
+data class JobEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -14,4 +14,6 @@ data class RuleEntity(
     val uuid: UUID? = null,
     val name: String,
     val description: String
-)
+) {
+    constructor() : this(null, null, "", "")
+}

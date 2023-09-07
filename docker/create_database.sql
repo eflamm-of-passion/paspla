@@ -1,6 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS paspla;
 
-CREATE TABLE IF NOT EXISTS rules (
+CREATE TABLE IF NOT EXISTS jobs (
     id serial PRIMARY KEY,
     uuid UUID DEFAULT gen_random_uuid(),
     name VARCHAR (255) NOT NULL,

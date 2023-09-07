@@ -18,5 +18,5 @@ data class ActionEntity(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rule_id", referencedColumnName = "id")
-    val rule: RuleEntity
+    val rule: JobEntity
 )

@@ -1,6 +1,6 @@
 package io.eflamm.paspla.model
 
-data class RuleInsertDTO(
+data class JobInsertDTO(
     val name: String,
     val description: String
 )
