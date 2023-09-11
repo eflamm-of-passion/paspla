@@ -1,6 +1,6 @@
-package io.eflamm.paspla.model
+package io.eflamm.paspla.model.action.sendmail
 
-import io.eflamm.paspla.service.actions.Action
+import io.eflamm.paspla.model.job.JobEntity
 import jakarta.persistence.*
 import java.util.*
 
@@ -24,7 +24,7 @@ data class SendMailActionEntity(
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     val job: JobEntity?
-) : Action<Unit, Unit> { // TODO create the classes
+) { // TODO create the classes
 
     constructor() : this(
         id = null,
@@ -37,9 +37,5 @@ data class SendMailActionEntity(
         attachmentFilename = "",
         job = null
     )
-
-    override fun process(data: Unit?) {
-        TODO("Not yet implemented")
-    }
 
 }

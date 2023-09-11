@@ -1,4 +1,4 @@
-package io.eflamm.paspla.model
+package io.eflamm.paspla.model.action.httprequest
 
 import java.util.*
 

@@ -1,8 +1,8 @@
-package io.eflamm.paspla.service.actions
+package io.eflamm.paspla.service.action
 
 import io.eflamm.paspla.exception.ResourceNotFoundException
-import io.eflamm.paspla.model.HttpRequestActionEntity
-import io.eflamm.paspla.model.HttpRequestActionInsertDTO
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionEntity
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionInsertDTO
 import io.eflamm.paspla.repository.HttpRequestActionRepository
 import io.eflamm.paspla.service.JobService
 import org.springframework.beans.factory.annotation.Autowired

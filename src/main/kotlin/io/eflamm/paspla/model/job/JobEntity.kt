@@ -1,5 +1,7 @@
-package io.eflamm.paspla.model
+package io.eflamm.paspla.model.job
 
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionEntity
+import io.eflamm.paspla.model.action.sendmail.SendMailActionEntity
 import jakarta.persistence.*
 import java.util.*
 

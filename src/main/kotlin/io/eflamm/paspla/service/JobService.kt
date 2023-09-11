@@ -1,9 +1,10 @@
 package io.eflamm.paspla.service
 
 import io.eflamm.paspla.exception.ResourceNotFoundException
-import io.eflamm.paspla.model.HttpRequestActionEntity
-import io.eflamm.paspla.model.JobEntity
-import io.eflamm.paspla.model.JobInsertDTO
+import io.eflamm.paspla.executor.HttpRequestActionExecutor
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionEntity
+import io.eflamm.paspla.model.job.JobEntity
+import io.eflamm.paspla.model.job.JobInsertDTO
 import io.eflamm.paspla.repository.JobRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -16,6 +17,8 @@ class JobService {
 
     @Autowired
     private lateinit var jobRepository: JobRepository
+    @Autowired
+    private lateinit var httpRequestActionExecutor: HttpRequestActionExecutor
 
     fun processJobs(){
 //        println("yep it works")
@@ -26,8 +29,9 @@ class JobService {
     }
 
     fun processJob(jobEntity: JobEntity) {
+        // TODO refacto the execution of all actions
         var actions: List<HttpRequestActionEntity> = jobEntity.httpRequestActions
-        actions.forEach { action -> println(action.url) }
+        actions.forEach { action -> httpRequestActionExecutor.process(action) }
     }
 
 

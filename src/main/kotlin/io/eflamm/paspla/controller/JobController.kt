@@ -1,9 +1,9 @@
 package io.eflamm.paspla.controller
 
 import io.eflamm.paspla.exception.ResourceNotFoundException
-import io.eflamm.paspla.model.JobDTO
-import io.eflamm.paspla.model.JobEntity
-import io.eflamm.paspla.model.JobInsertDTO
+import io.eflamm.paspla.model.job.JobDTO
+import io.eflamm.paspla.model.job.JobEntity
+import io.eflamm.paspla.model.job.JobInsertDTO
 import io.eflamm.paspla.service.JobService
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info

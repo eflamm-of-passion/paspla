@@ -2,7 +2,10 @@ package io.eflamm.paspla.controller
 
 import io.eflamm.paspla.exception.ResourceNotFoundException
 import io.eflamm.paspla.model.*
-import io.eflamm.paspla.service.actions.HttpRequestActionService
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionDTO
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionEntity
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionInsertDTO
+import io.eflamm.paspla.service.action.HttpRequestActionService
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info
 import org.slf4j.Logger

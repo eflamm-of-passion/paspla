@@ -1,6 +1,6 @@
 package io.eflamm.paspla.repository
 
-import io.eflamm.paspla.model.JobEntity
+import io.eflamm.paspla.model.job.JobEntity
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.util.*

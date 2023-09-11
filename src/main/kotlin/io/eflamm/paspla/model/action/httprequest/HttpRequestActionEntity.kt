@@ -1,6 +1,6 @@
-package io.eflamm.paspla.model
+package io.eflamm.paspla.model.action.httprequest
 
-import io.eflamm.paspla.service.actions.Action
+import io.eflamm.paspla.model.job.JobEntity
 import jakarta.persistence.*
 import java.util.*
 
@@ -24,12 +24,8 @@ data class HttpRequestActionEntity(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     var job: JobEntity?
-) : Action<Unit, HttpResponseOutput> {
+) {
 
     constructor() : this(id = null, uuid = null, rank = 0, url = "", httpVerb = "", queryParams = null, headers= null, body= null, job = null)
 
-    override fun process(data: Unit?): HttpResponseOutput {
-        TODO("Not yet implemented")
-        println("this is an http request")
-    }
 }
