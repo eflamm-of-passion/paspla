@@ -37,24 +37,24 @@ class JobController {
     }
 
     @GetMapping("/", produces = ["application/json"])
-    fun getRules(): ResponseEntity<List<JobDTO>> {
+    fun getJobs(): ResponseEntity<List<JobDTO>> {
         logger.info("GET /api/jobs - request")
-        var ruleDTOs = mapToDto(jobsService.getAllJobs())
+        var jobDTOs = mapToDto(jobsService.getAllJobs())
         logger.info("GET /api/jobs - response 200 OK ")
-        return ResponseEntity.status(HttpStatus.OK).body(ruleDTOs)
+        return ResponseEntity.status(HttpStatus.OK).body(jobDTOs)
     }
 
     @PostMapping("/", consumes = ["application/json"], produces = ["application/json"])
-    fun createRule(@RequestBody ruleInsertDTO: JobInsertDTO): ResponseEntity<JobDTO> {
+    fun createJob(@RequestBody jobInsertDTO: JobInsertDTO): ResponseEntity<JobDTO> {
         logger.info("POST /api/jobs - request")
-        var createRuleDTO =  mapToDto(jobsService.createJob(ruleInsertDTO))
+        var createJobDTO =  mapToDto(jobsService.createJob(jobInsertDTO))
         logger.info("POST /api/jobs - response 200 OK")
-        return ResponseEntity.status(HttpStatus.CREATED).body(createRuleDTO)
+        return ResponseEntity.status(HttpStatus.CREATED).body(createJobDTO)
     }
 
     @DeleteMapping("/{uuid}")
-    fun deleteRule(@PathVariable uuid: UUID): ResponseEntity<Unit> {
-        logger.info("DELETE /api/rules/$uuid")
+    fun deleteJob(@PathVariable uuid: UUID): ResponseEntity<Unit> {
+        logger.info("DELETE /api/jobs/$uuid")
         try {
             jobsService.deleteJob(uuid)
             logger.info("DELETE /api/jobs/$uuid\" - response 200 OK")
