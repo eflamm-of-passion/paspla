@@ -11,7 +11,7 @@ class HttpRequestActionExecutor : ActionExecutor<HttpRequestActionEntity, HttpRe
         val response = RestTemplate().getForEntity(data.url, String::class.java)
         println("${response.statusCode} - ${response.body}")
 
-        return HttpResponseOutput(code = response.statusCode, body = response.body ?: "")
+        return HttpResponseOutput(url = data.url, code = response.statusCode, body = response.body ?: "")
     }
 
 }

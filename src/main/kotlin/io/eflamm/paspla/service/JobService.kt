@@ -1,8 +1,11 @@
 package io.eflamm.paspla.service
 
 import io.eflamm.paspla.exception.ResourceNotFoundException
+import io.eflamm.paspla.executor.ActionProcessor
 import io.eflamm.paspla.executor.HttpRequestActionExecutor
+import io.eflamm.paspla.model.action.ActionConfig
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionEntity
+import io.eflamm.paspla.model.action.sendmail.SendMailActionEntity
 import io.eflamm.paspla.model.job.JobEntity
 import io.eflamm.paspla.model.job.JobInsertDTO
 import io.eflamm.paspla.repository.JobRepository
@@ -19,6 +22,8 @@ class JobService {
     private lateinit var jobRepository: JobRepository
     @Autowired
     private lateinit var httpRequestActionExecutor: HttpRequestActionExecutor
+    @Autowired
+    private lateinit var actionProcessor: ActionProcessor
 
     fun processJobs(){
 //        println("yep it works")
@@ -29,9 +34,11 @@ class JobService {
     }
 
     fun processJob(jobEntity: JobEntity) {
-        // TODO refacto the execution of all actions
-        var actions: List<HttpRequestActionEntity> = jobEntity.httpRequestActions
-        actions.forEach { action -> httpRequestActionExecutor.process(action) }
+        // TODO refacto the execution of all actions, in the right order, and pass data each time
+        var httpActions: List<HttpRequestActionEntity> = jobEntity.httpRequestActions
+        var mailActions: List<SendMailActionEntity> = jobEntity.sendMailActions
+        var actions : List<ActionConfig> = httpActions.plus(mailActions)
+        actionProcessor.processActions(actions)
     }
 
 

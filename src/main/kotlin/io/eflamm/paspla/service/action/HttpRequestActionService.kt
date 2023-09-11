@@ -30,7 +30,6 @@ class HttpRequestActionService() : ActionService {
             body = actionToCreateDTO.body,
             job = parentJob
         )
-        actionToCreate.job = parentJob
 
         return httpRequestActionRepository.save(actionToCreate)
     }

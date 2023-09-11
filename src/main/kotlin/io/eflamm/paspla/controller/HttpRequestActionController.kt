@@ -31,7 +31,7 @@ class HttpRequestActionController {
     private val logger: Logger = LoggerFactory.getLogger(HttpRequestActionController::class.java)
 
     @GetMapping("/", produces = ["application/json"])
-    fun getHttpRequestActions(): ResponseEntity<List<HttpRequestActionInsertDTO>> {
+    fun getHttpRequestActions(): ResponseEntity<List<HttpRequestActionDTO>> {
         logger.info("GET /api/actions/http-request/ - request")
         // TODO
         logger.info("GET /api/actions/http-request/ - response 200 OK ")
@@ -54,7 +54,7 @@ class HttpRequestActionController {
             logger.info("DELETE /api/actions/http-request/$uuid\" - response 200 OK")
             return ResponseEntity.status(HttpStatus.OK).build()
         } catch (resourceNotFoundException: ResourceNotFoundException) {
-            logger.info("DELETE /api/actions/http-request/jobs/$uuid\" - response 404 not found")
+            logger.info("DELETE /api/actions/http-request/$uuid\" - response 404 not found")
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build()
         }
     }

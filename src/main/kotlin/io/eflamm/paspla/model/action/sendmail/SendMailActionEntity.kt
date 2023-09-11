@@ -1,5 +1,6 @@
 package io.eflamm.paspla.model.action.sendmail
 
+import io.eflamm.paspla.model.action.ActionConfig
 import io.eflamm.paspla.model.job.JobEntity
 import jakarta.persistence.*
 import java.util.*
@@ -9,10 +10,10 @@ import java.util.*
 data class SendMailActionEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
+    val id: Long? = null,
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(columnDefinition = "UUID DEFAULT gen_random_uuid()", insertable = false, updatable = false)
-    val uuid: UUID?,
+    val uuid: UUID? = null,
     val rank: Int,
     val sender: String,
     val recipients: String,
@@ -24,7 +25,7 @@ data class SendMailActionEntity(
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     val job: JobEntity?
-) { // TODO create the classes
+) : ActionConfig { // TODO create the classes
 
     constructor() : this(
         id = null,

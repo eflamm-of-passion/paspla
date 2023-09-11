@@ -1,5 +1,6 @@
 package io.eflamm.paspla.model.action.httprequest
 
+import io.eflamm.paspla.model.action.ActionConfig
 import io.eflamm.paspla.model.job.JobEntity
 import jakarta.persistence.*
 import java.util.*
@@ -24,8 +25,6 @@ data class HttpRequestActionEntity(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     var job: JobEntity?
-) {
-
+) : ActionConfig {
     constructor() : this(id = null, uuid = null, rank = 0, url = "", httpVerb = "", queryParams = null, headers= null, body= null, job = null)
-
 }
