@@ -2,8 +2,8 @@ package io.eflamm.paspla.controller
 
 import io.eflamm.paspla.exception.ResourceNotFoundException
 import io.eflamm.paspla.model.*
+import io.eflamm.paspla.model.action.httprequest.HttpRequestConfig
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionDTO
-import io.eflamm.paspla.model.action.httprequest.HttpRequestActionConfigEntity
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionInsertDTO
 import io.eflamm.paspla.service.action.HttpRequestActionService
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
@@ -20,7 +20,7 @@ import java.util.*
 @RequestMapping("actions/http-request")
 @OpenAPIDefinition(
     info= Info(
-        title = "Handle the actions",
+        title = "Handle the actions to make an HTTP request.",
         version = "v1"
     )
 )
@@ -33,9 +33,9 @@ class HttpRequestActionController {
     @GetMapping("/", produces = ["application/json"])
     fun getHttpRequestActions(): ResponseEntity<List<HttpRequestActionDTO>> {
         logger.info("GET /api/actions/http-request/ - request")
-        // TODO
+        var actionsDTOs = mapToDto(httpRequestActionService.getAllActions())
         logger.info("GET /api/actions/http-request/ - response 200 OK ")
-        return ResponseEntity.status(HttpStatus.OK).body(emptyList())
+        return ResponseEntity.status(HttpStatus.OK).body(actionsDTOs)
     }
 
     @PostMapping("/", consumes = ["application/json"], produces = ["application/json"])
@@ -59,7 +59,7 @@ class HttpRequestActionController {
         }
     }
 
-    private fun mapToDto(entity: HttpRequestActionConfigEntity): HttpRequestActionDTO {
+    private fun mapToDto(entity: HttpRequestConfig): HttpRequestActionDTO {
         return HttpRequestActionDTO(
             uuid = entity.uuid,
             rank = entity.rank,
@@ -72,7 +72,7 @@ class HttpRequestActionController {
         )
     }
 
-    private fun mapToDto(entities: List<HttpRequestActionConfigEntity>): List<HttpRequestActionDTO> {
+    private fun mapToDto(entities: List<HttpRequestConfig>): List<HttpRequestActionDTO> {
         return entities.map { entity -> mapToDto(entity) }
     }
 }

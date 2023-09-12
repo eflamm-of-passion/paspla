@@ -2,8 +2,8 @@ package io.eflamm.paspla.controller
 
 import io.eflamm.paspla.exception.ResourceNotFoundException
 import io.eflamm.paspla.model.*
+import io.eflamm.paspla.model.action.sendmail.SendMailConfig
 import io.eflamm.paspla.model.action.sendmail.SendMailActionDTO
-import io.eflamm.paspla.model.action.sendmail.SendMailActionConfigEntity
 import io.eflamm.paspla.model.action.sendmail.SendMailActionInsertDTO
 import io.eflamm.paspla.service.action.SendMailActionService
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
@@ -20,7 +20,7 @@ import java.util.*
 @RequestMapping("actions/send-mail")
 @OpenAPIDefinition(
     info= Info(
-        title = "Handle the actions",
+        title = "Handle the actions to send a mail.",
         version = "v1"
     )
 )
@@ -33,7 +33,7 @@ class SendMailActionController {
     @GetMapping("/", produces = ["application/json"])
     fun getHttpRequestActions(): ResponseEntity<List<SendMailActionDTO>> {
         logger.info("GET /api/actions/send-mail/ - request")
-        // TODO
+        sendMailActionService.getAllActions()
         logger.info("GET /api/actions/send-mail/ - response 200 OK ")
         return ResponseEntity.status(HttpStatus.OK).body(emptyList())
     }
@@ -59,7 +59,7 @@ class SendMailActionController {
         }
     }
 
-    private fun mapToDto(entity: SendMailActionConfigEntity): SendMailActionDTO {
+    private fun mapToDto(entity: SendMailConfig): SendMailActionDTO {
         return SendMailActionDTO(
             uuid = entity.uuid,
             rank = entity.rank,
@@ -72,7 +72,7 @@ class SendMailActionController {
         )
     }
 
-    private fun mapToDto(entities: List<SendMailActionConfigEntity>): List<SendMailActionDTO> {
+    private fun mapToDto(entities: List<SendMailConfig>): List<SendMailActionDTO> {
         return entities.map { entity -> mapToDto(entity) }
     }
 }

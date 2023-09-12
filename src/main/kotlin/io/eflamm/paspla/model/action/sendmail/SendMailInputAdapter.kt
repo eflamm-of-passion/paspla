@@ -14,17 +14,18 @@ data class SendMailInputAdapter(
     /**
      * From an HTTP request action
      */
-    constructor(sendMailAConfiguration: SendMailActionConfigEntity, httpResponseOutput: HttpRequestActionOutput): this(
-        sender = sendMailAConfiguration.sender,
-        recipients = sendMailAConfiguration.recipients,
-        carbonCopyRecipients = sendMailAConfiguration.recipients,
-        invisibleCarbonCopyRecipients = sendMailAConfiguration.recipients,
-        attachmentFilename = sendMailAConfiguration.attachmentFilename,
+    constructor(sendMailConfig: SendMailConfig, output: HttpRequestActionOutput): this(
+        sender = sendMailConfig.sender,
+        recipients = sendMailConfig.recipients,
+        carbonCopyRecipients = sendMailConfig.recipients,
+        invisibleCarbonCopyRecipients = sendMailConfig.recipients,
+        attachmentFilename = sendMailConfig.attachmentFilename,
             body = """
-                URL called : ${httpResponseOutput.url}
-                Status code response : ${httpResponseOutput.code}
+                URL called : ${output.url}
+                Status code response : ${output.code}
                 Body:
-                ${httpResponseOutput.body}
+                ${output.body}
                 """.trimIndent()
     )
+
 }

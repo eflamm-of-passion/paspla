@@ -7,14 +7,14 @@ import java.util.*
 
 @Entity
 @Table(name = "http_request_actions")
-data class HttpRequestActionConfigEntity(
+data class HttpRequestConfig(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(columnDefinition = "UUID DEFAULT gen_random_uuid()", insertable = false, updatable = false)
     val uuid: UUID? = null,
-    val rank: Int,
+    var rank: Int,
     val url: String,
     @Column(name = "http_verb")
     val httpVerb: String,

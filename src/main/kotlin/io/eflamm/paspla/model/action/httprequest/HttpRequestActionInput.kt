@@ -7,7 +7,7 @@ data class HttpRequestActionInput(
     val headers: String?,
     val body: String?,
 ) {
-    constructor(config: HttpRequestActionConfigEntity) : this(
+    constructor(config: HttpRequestConfig) : this(
         config.url,
         config.httpVerb,
         config.queryParams,
