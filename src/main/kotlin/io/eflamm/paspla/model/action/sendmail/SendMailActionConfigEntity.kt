@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 @Table(name = "send_mail_actions")
-data class SendMailActionEntity(
+data class SendMailActionConfigEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,

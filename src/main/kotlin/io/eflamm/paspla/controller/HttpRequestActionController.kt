@@ -3,7 +3,7 @@ package io.eflamm.paspla.controller
 import io.eflamm.paspla.exception.ResourceNotFoundException
 import io.eflamm.paspla.model.*
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionDTO
-import io.eflamm.paspla.model.action.httprequest.HttpRequestActionEntity
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionConfigEntity
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionInsertDTO
 import io.eflamm.paspla.service.action.HttpRequestActionService
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
@@ -59,7 +59,7 @@ class HttpRequestActionController {
         }
     }
 
-    private fun mapToDto(entity: HttpRequestActionEntity): HttpRequestActionDTO {
+    private fun mapToDto(entity: HttpRequestActionConfigEntity): HttpRequestActionDTO {
         return HttpRequestActionDTO(
             uuid = entity.uuid,
             rank = entity.rank,
@@ -72,7 +72,7 @@ class HttpRequestActionController {
         )
     }
 
-    private fun mapToDto(entities: List<HttpRequestActionEntity>): List<HttpRequestActionDTO> {
+    private fun mapToDto(entities: List<HttpRequestActionConfigEntity>): List<HttpRequestActionDTO> {
         return entities.map { entity -> mapToDto(entity) }
     }
 }

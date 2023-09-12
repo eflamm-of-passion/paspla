@@ -1,6 +1,6 @@
 package io.eflamm.paspla.model.action.sendmail
 
-import io.eflamm.paspla.model.action.httprequest.HttpResponseOutput
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionOutput
 
 data class SendMailInputAdapter(
     override val sender: String,
@@ -14,7 +14,7 @@ data class SendMailInputAdapter(
     /**
      * From an HTTP request action
      */
-    constructor(sendMailAConfiguration: SendMailActionEntity, httpResponseOutput: HttpResponseOutput): this(
+    constructor(sendMailAConfiguration: SendMailActionConfigEntity, httpResponseOutput: HttpRequestActionOutput): this(
         sender = sendMailAConfiguration.sender,
         recipients = sendMailAConfiguration.recipients,
         carbonCopyRecipients = sendMailAConfiguration.recipients,

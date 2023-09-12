@@ -1,7 +1,7 @@
 package io.eflamm.paspla.service.action
 
 import io.eflamm.paspla.exception.ResourceNotFoundException
-import io.eflamm.paspla.model.action.httprequest.HttpRequestActionEntity
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionConfigEntity
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionInsertDTO
 import io.eflamm.paspla.repository.HttpRequestActionRepository
 import io.eflamm.paspla.service.JobService
@@ -19,9 +19,9 @@ class HttpRequestActionService() : ActionService {
     @Autowired
     private lateinit var jobService: JobService
 
-    fun createAction(actionToCreateDTO: HttpRequestActionInsertDTO): HttpRequestActionEntity {
+    fun createAction(actionToCreateDTO: HttpRequestActionInsertDTO): HttpRequestActionConfigEntity {
         var parentJob = jobService.getJobByUuid(actionToCreateDTO.jobUuid) ?: throw ResourceNotFoundException("Could not insert action, the job was not found for the uuid $actionToCreateDTO.jobUuid")
-        val actionToCreate = HttpRequestActionEntity(
+        val actionToCreate = HttpRequestActionConfigEntity(
             rank = actionToCreateDTO.rank,
             url = actionToCreateDTO.url,
             httpVerb = actionToCreateDTO.httpVerb,
@@ -34,7 +34,7 @@ class HttpRequestActionService() : ActionService {
         return httpRequestActionRepository.save(actionToCreate)
     }
 
-    fun updateAction(actionToUpdateUuid: UUID, updatedAction: HttpRequestActionEntity) {
+    fun updateAction(actionToUpdateUuid: UUID, updatedAction: HttpRequestActionConfigEntity) {
         TODO("Not yet implemented")
     }
 

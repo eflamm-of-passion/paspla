@@ -1,7 +1,7 @@
 package io.eflamm.paspla.model.job
 
-import io.eflamm.paspla.model.action.httprequest.HttpRequestActionEntity
-import io.eflamm.paspla.model.action.sendmail.SendMailActionEntity
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionConfigEntity
+import io.eflamm.paspla.model.action.sendmail.SendMailActionConfigEntity
 import jakarta.persistence.*
 import java.util.*
 
@@ -18,9 +18,9 @@ data class JobEntity(
     val description: String,
 
     @OneToMany(mappedBy = "job", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val httpRequestActions: List<HttpRequestActionEntity> = mutableListOf(),
+    val httpRequestActions: List<HttpRequestActionConfigEntity> = mutableListOf(),
     @OneToMany(mappedBy = "job", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val sendMailActions: List<SendMailActionEntity> = mutableListOf()
+    val sendMailActions: List<SendMailActionConfigEntity> = mutableListOf()
 ) {
     constructor() : this(null, null, "", "")
 }

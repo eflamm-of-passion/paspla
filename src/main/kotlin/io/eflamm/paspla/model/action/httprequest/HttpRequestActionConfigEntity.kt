@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 @Table(name = "http_request_actions")
-data class HttpRequestActionEntity(
+data class HttpRequestActionConfigEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,

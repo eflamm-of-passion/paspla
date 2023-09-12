@@ -10,7 +10,7 @@ class SchedulerService {
     @Autowired
     private lateinit var jobsService: JobService
 
-    @Scheduled(fixedDelay = 20000)
+    @Scheduled(fixedDelay = 30000)
     fun triggerAtInterval() {
         jobsService.processJobs()
     }

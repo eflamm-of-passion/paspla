@@ -1,8 +1,10 @@
 package io.eflamm.paspla.executor
 
 import io.eflamm.paspla.model.action.ActionConfig
-import io.eflamm.paspla.model.action.httprequest.HttpRequestActionEntity
-import io.eflamm.paspla.model.action.sendmail.SendMailActionEntity
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionConfigEntity
+import io.eflamm.paspla.model.action.httprequest.HttpRequestActionInput
+import io.eflamm.paspla.model.action.sendmail.SendMailActionConfigEntity
+import io.eflamm.paspla.model.action.sendmail.SendMailInput
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -17,29 +19,31 @@ class ActionProcessor(var availableActionExecutor: List<ActionExecutor<*,*>>) {
     private lateinit var sendMailActionExecutor: SendMailActionExecutor
 
     fun processActions(actions: List<ActionConfig>) {
-        val pairs = actions.asSequence()
+        val emptyFinalAction: ActionConfig = object : ActionConfig {} // the final action will not be processed
+        val mutableActions = actions.toMutableList()
+        mutableActions.add(emptyFinalAction)
+        val actionsByPairs =  mutableActions.asSequence()
             .windowed(size = 2, step = 1, partialWindows = false)
             .toList()
 
-        for ((currentAction, nextAction) in pairs) {
+        var nextActionInputData : Any? = null
+        for ((currentActionConfig, nextActionConfig) in actionsByPairs) {
             // TODO get output after exec
-            when (currentAction) {
-                is HttpRequestActionEntity -> {
-                    httpRequestActionExecutor.process(currentAction)
+            when (currentActionConfig) {
+                is HttpRequestActionConfigEntity -> {
+                    val input = HttpRequestActionInput(currentActionConfig)
+                    nextActionInputData = httpRequestActionExecutor.process(input)
                 }
-                is SendMailActionEntity -> {
-                    sendMailActionExecutor.process(currentAction)
-                }
-                else -> {
-                    // TODO throw exception
-                }
-            }
-            when (nextAction) {
-                is HttpRequestActionEntity -> {
-                    httpRequestActionExecutor.process(nextAction)
-                }
-                is SendMailActionEntity -> {
-                    sendMailActionExecutor.process(nextAction)
+                is SendMailActionConfigEntity -> {
+                    val input = SendMailInput(
+                        sender = currentActionConfig.sender,
+                        recipients = currentActionConfig.recipients,
+                        carbonCopyRecipients = currentActionConfig.carbonCopyRecipients,
+                        invisibleCarbonCopyRecipients = currentActionConfig.invisibleCarbonCopyRecipients,
+                        attachmentFilename = currentActionConfig.attachmentFilename,
+                        body = nextActionInputData.toString()
+                    )
+                    nextActionInputData = sendMailActionExecutor.process(input)
                 }
                 else -> {
                     // TODO throw exception
@@ -49,7 +53,7 @@ class ActionProcessor(var availableActionExecutor: List<ActionExecutor<*,*>>) {
     }
 
 
-    fun getRightExecutor(actionData: HttpRequestActionEntity) {
+    fun getRightExecutor(actionData: HttpRequestActionConfigEntity) {
         return
     }
 
