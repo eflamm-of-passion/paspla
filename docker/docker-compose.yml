@@ -14,3 +14,9 @@ services:
     volumes:
       - ./:/docker-entrypoint-initdb.d
     command: ["postgres", "-c", "log_statement=all"]
+  smtp4dev:
+    image: rnwood/smtp4dev
+    restart: always
+    ports:
+      - "8181:80"
+      - "25:25"

@@ -1,5 +1,6 @@
 package io.eflamm.paspla.model.action.sendmail
 
+import io.eflamm.paspla.model.action.ActionOutput
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionOutput
 
 data class SendMailInputAdapter(
@@ -10,6 +11,25 @@ data class SendMailInputAdapter(
     override val attachmentFilename: String,
     override val body: String?
 ) : SendMailInput(sender, recipients, carbonCopyRecipients, invisibleCarbonCopyRecipients, attachmentFilename, body) {
+
+    companion object {
+        // design pattern : factory method
+        fun createSendMailInput(config: SendMailConfig, output: ActionOutput?): SendMailInput? {
+            var createdSendMailInput : SendMailInput? = null
+            when(output) {
+                is HttpRequestActionOutput -> {
+                    createdSendMailInput = SendMailInputAdapter(config, output)
+                }
+                is SendMailOutput -> {
+                    // TODO
+                }
+                else -> {
+                    // TODO
+                }
+            }
+            return createdSendMailInput
+        }
+    }
 
     /**
      * From an HTTP request action

@@ -1,18 +1,9 @@
 package io.eflamm.paspla.model.action.httprequest
 
-data class HttpRequestActionInput(
-    val url: String,
-    val httpVerb: String,
-    val queryParams: String?,
-    val headers: String?,
-    val body: String?,
-) {
-    constructor(config: HttpRequestConfig) : this(
-        config.url,
-        config.httpVerb,
-        config.queryParams,
-        config.headers,
-        config.body,
-    )
-
-}
+open class HttpRequestActionInput(
+    open val url: String,
+    open val httpVerb: String,
+    open val queryParams: String?,
+    open val headers: String?,
+    open val body: String?,
+)

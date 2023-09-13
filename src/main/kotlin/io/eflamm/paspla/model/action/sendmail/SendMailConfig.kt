@@ -8,13 +8,9 @@ import java.util.*
 @Entity
 @Table(name = "send_mail_actions")
 data class SendMailConfig(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "UUID DEFAULT gen_random_uuid()", insertable = false, updatable = false)
-    val uuid: UUID? = null,
-    var rank: Int,
+    override val id: Long? = null,
+    override val uuid: UUID? = null,
+    override var rank: Int,
     val sender: String,
     val recipients: String,
     @Column(name = "carbon_copy_recipients")
@@ -25,7 +21,7 @@ data class SendMailConfig(
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     val job: JobEntity?
-) : ActionConfig {
+) : ActionConfig(id, uuid, rank) {
 
     constructor() : this(
         id = null,

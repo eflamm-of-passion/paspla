@@ -7,10 +7,13 @@ import org.springframework.stereotype.Component
 @Component
 class SchedulerService {
 
+    companion object {
+        const val fixedDelayInMilis: Long = 300000 // 5mn
+    }
     @Autowired
     private lateinit var jobsService: JobService
 
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelay = fixedDelayInMilis)
     fun triggerAtInterval() {
         jobsService.processJobs()
     }

@@ -8,13 +8,9 @@ import java.util.*
 @Entity
 @Table(name = "http_request_actions")
 data class HttpRequestConfig(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "UUID DEFAULT gen_random_uuid()", insertable = false, updatable = false)
-    val uuid: UUID? = null,
-    var rank: Int,
+    override val id: Long? = null,
+    override val uuid: UUID? = null,
+    override var rank: Int,
     val url: String,
     @Column(name = "http_verb")
     val httpVerb: String,
@@ -25,6 +21,6 @@ data class HttpRequestConfig(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id", referencedColumnName = "id")
     var job: JobEntity?
-) : ActionConfig {
+) : ActionConfig(id, uuid, rank) {
     constructor() : this(id = null, uuid = null, rank = 0, url = "", httpVerb = "", queryParams = null, headers= null, body= null, job = null)
 }
