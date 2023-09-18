@@ -6,10 +6,12 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.3"
 	kotlin("jvm") version "1.8.22"
 	kotlin("plugin.spring") version "1.8.22"
+	id("org.sonarqube") version "4.3.1.3277"
+	id("org.owasp.dependencycheck") version "8.4.0"
 }
 
 group = "io.eflamm"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
@@ -28,6 +30,17 @@ dependencies {
 	implementation("org.postgresql:postgresql")
 	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+springBoot {
+	buildInfo()
+}
+
+sonar {
+	properties {
+		property("sonar.projectKey", "Paspla")
+		property("sonar.token", "sqp_ca1bbc0b5cd2486430da93691cc5c71afd880a50")
+	}
 }
 
 tasks.withType<KotlinCompile> {
