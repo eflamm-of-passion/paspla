@@ -1,6 +1,6 @@
 package io.eflamm.paspla.model.action.httprequest
 
-import io.eflamm.paspla.model.action.ActionOutput
+import io.eflamm.paspla.model.action.ActionData
 import io.eflamm.paspla.model.action.sendmail.SendMailOutput
 
 data class HttpRequestActionInputAdapter(
@@ -13,7 +13,7 @@ data class HttpRequestActionInputAdapter(
 
     companion object {
         // design pattern : factory method
-        fun createSendMailInput(config: HttpRequestConfig, output: ActionOutput?): HttpRequestActionInput? {
+        fun createInput(config: HttpRequestConfig, output: ActionData?): HttpRequestActionInput? {
             var createdSendMailInput : HttpRequestActionInput? = null
             when(output) {
                 is HttpRequestActionOutput -> {

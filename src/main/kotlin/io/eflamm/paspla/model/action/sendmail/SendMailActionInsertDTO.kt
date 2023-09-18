@@ -9,5 +9,6 @@ data class SendMailActionInsertDTO(
     val carbonCopyRecipients: String,
     val invisibleCarbonCopyRecipients: String,
     val attachmentFilename: String,
-    val jobUuid: UUID
+    val body: String,
+    val workflowUuid: UUID
 )

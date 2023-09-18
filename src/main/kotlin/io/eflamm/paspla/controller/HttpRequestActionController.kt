@@ -68,7 +68,7 @@ class HttpRequestActionController {
             queryParams = entity.queryParams,
             headers = entity.headers,
             body = entity.body,
-            jobUuid = entity.job?.uuid
+            workflowUuid = entity.workflow?.uuid
         )
     }
 

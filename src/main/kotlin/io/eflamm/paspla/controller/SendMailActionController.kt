@@ -68,7 +68,7 @@ class SendMailActionController {
             carbonCopyRecipients = entity.carbonCopyRecipients,
             invisibleCarbonCopyRecipients = entity.invisibleCarbonCopyRecipients,
             attachmentFilename = entity.attachmentFilename,
-            jobUuid = entity.job?.uuid
+            workflowUuid = entity.workflow?.uuid
         )
     }
 

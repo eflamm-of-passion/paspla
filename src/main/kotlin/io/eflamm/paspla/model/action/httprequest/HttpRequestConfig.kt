@@ -1,7 +1,7 @@
 package io.eflamm.paspla.model.action.httprequest
 
 import io.eflamm.paspla.model.action.ActionConfig
-import io.eflamm.paspla.model.job.JobEntity
+import io.eflamm.paspla.model.workflow.WorkflowEntity
 import jakarta.persistence.*
 import java.util.*
 
@@ -19,8 +19,8 @@ data class HttpRequestConfig(
     val headers: String?,
     val body: String?,
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_id", referencedColumnName = "id")
-    var job: JobEntity?
+    @JoinColumn(name = "workflow_id", referencedColumnName = "id")
+    var workflow: WorkflowEntity?
 ) : ActionConfig(id, uuid, rank) {
-    constructor() : this(id = null, uuid = null, rank = 0, url = "", httpVerb = "", queryParams = null, headers= null, body= null, job = null)
+    constructor() : this(id = null, uuid = null, rank = 0, url = "", httpVerb = "", queryParams = null, headers= null, body= null, workflow = null)
 }

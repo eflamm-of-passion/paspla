@@ -1,6 +1,6 @@
 package io.eflamm.paspla.model.action.sendmail
 
-import io.eflamm.paspla.model.action.ActionOutput
+import io.eflamm.paspla.model.action.ActionData
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionOutput
 
 data class SendMailInputAdapter(
@@ -14,7 +14,7 @@ data class SendMailInputAdapter(
 
     companion object {
         // design pattern : factory method
-        fun createSendMailInput(config: SendMailConfig, output: ActionOutput?): SendMailInput? {
+        fun createInput(config: SendMailConfig, output: ActionData?): SendMailInput? {
             var createdSendMailInput : SendMailInput? = null
             when(output) {
                 is HttpRequestActionOutput -> {
@@ -46,6 +46,16 @@ data class SendMailInputAdapter(
                 Body:
                 ${output.body}
                 """.trimIndent()
+    )
+
+    // default
+    constructor(sendMailConfig: SendMailConfig): this(
+        sender = sendMailConfig.sender,
+        recipients = sendMailConfig.recipients,
+        carbonCopyRecipients = sendMailConfig.recipients,
+        invisibleCarbonCopyRecipients = sendMailConfig.recipients,
+        attachmentFilename = sendMailConfig.attachmentFilename,
+        body = sendMailConfig.body
     )
 
 }

@@ -11,11 +11,11 @@ class SchedulerService {
         const val fixedDelayInMilis: Long = 300000 // 5mn
     }
     @Autowired
-    private lateinit var jobsService: JobService
+    private lateinit var workflowsService: WorkflowService
 
     @Scheduled(fixedDelay = fixedDelayInMilis)
     fun triggerAtInterval() {
-        jobsService.processJobs()
+        workflowsService.processWorkflows()
     }
 }
 

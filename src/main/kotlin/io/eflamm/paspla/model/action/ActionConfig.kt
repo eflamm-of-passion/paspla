@@ -14,4 +14,5 @@ open class ActionConfig(
     open var rank: Int,
 ) {
     constructor(rank: Int) : this(null, null, rank)
+    constructor() : this(null, null, 0)
 }

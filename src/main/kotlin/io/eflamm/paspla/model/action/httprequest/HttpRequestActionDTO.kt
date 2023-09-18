@@ -10,5 +10,5 @@ data class HttpRequestActionDTO(
     val queryParams: String?,
     val headers: String?,
     val body: String?,
-    var jobUuid: UUID?
+    var workflowUuid: UUID?
 )

@@ -4,7 +4,7 @@ import io.eflamm.paspla.exception.ResourceNotFoundException
 import io.eflamm.paspla.model.action.httprequest.HttpRequestConfig
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionInsertDTO
 import io.eflamm.paspla.repository.HttpRequestActionRepository
-import io.eflamm.paspla.service.JobService
+import io.eflamm.paspla.service.WorkflowService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -17,14 +17,14 @@ class HttpRequestActionService() : ActionService {
     @Autowired
     private lateinit var httpRequestActionRepository: HttpRequestActionRepository
     @Autowired
-    private lateinit var jobService: JobService
+    private lateinit var workflowService: WorkflowService
 
     fun getAllActions(): List<HttpRequestConfig> {
         return httpRequestActionRepository.findAll().toList()
     }
 
     fun createAction(actionToCreateDTO: HttpRequestActionInsertDTO): HttpRequestConfig {
-        var parentJob = jobService.getJobByUuid(actionToCreateDTO.jobUuid) ?: throw ResourceNotFoundException("Could not insert action, the job was not found for the uuid $actionToCreateDTO.jobUuid")
+        var parentWorkflow = workflowService.getWorkflowByUuid(actionToCreateDTO.workflowUuid) ?: throw ResourceNotFoundException("Could not insert action, the workflow was not found for the uuid $actionToCreateDTO.workflowUuid")
         val actionToCreate = HttpRequestConfig(
             rank = actionToCreateDTO.rank,
             url = actionToCreateDTO.url,
@@ -32,7 +32,7 @@ class HttpRequestActionService() : ActionService {
             queryParams = actionToCreateDTO.queryParams,
             headers = actionToCreateDTO.headers,
             body = actionToCreateDTO.body,
-            job = parentJob
+            workflow = parentWorkflow
         )
 
         return httpRequestActionRepository.save(actionToCreate)
@@ -43,7 +43,7 @@ class HttpRequestActionService() : ActionService {
     }
 
     fun deleteAction(actionToDeleteUuid: UUID) {
-        val action = httpRequestActionRepository.findByUuid(actionToDeleteUuid) ?: throw ResourceNotFoundException("Could not delete the job, no job was not found for the uuid $actionToDeleteUuid")
+        val action = httpRequestActionRepository.findByUuid(actionToDeleteUuid) ?: throw ResourceNotFoundException("Could not delete the workflow, no workflow was not found for the uuid $actionToDeleteUuid")
         httpRequestActionRepository.delete(action)
     }
 

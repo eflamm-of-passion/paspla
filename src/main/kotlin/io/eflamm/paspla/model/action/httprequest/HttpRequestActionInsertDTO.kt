@@ -9,5 +9,5 @@ data class HttpRequestActionInsertDTO(
     val queryParams: String?,
     val headers: String?,
     val body: String?,
-    val jobUuid: UUID
+    val workflowUuid: UUID
 )

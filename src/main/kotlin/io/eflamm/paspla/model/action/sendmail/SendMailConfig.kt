@@ -1,7 +1,7 @@
 package io.eflamm.paspla.model.action.sendmail
 
 import io.eflamm.paspla.model.action.ActionConfig
-import io.eflamm.paspla.model.job.JobEntity
+import io.eflamm.paspla.model.workflow.WorkflowEntity
 import jakarta.persistence.*
 import java.util.*
 
@@ -18,9 +18,10 @@ data class SendMailConfig(
     @Column(name = "invisible_carbon_copy_recipients")
     val invisibleCarbonCopyRecipients: String,
     val attachmentFilename: String,
+    val body: String,
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "job_id", referencedColumnName = "id")
-    val job: JobEntity?
+    @JoinColumn(name = "workflow_id", referencedColumnName = "id")
+    val workflow: WorkflowEntity?
 ) : ActionConfig(id, uuid, rank) {
 
     constructor() : this(
@@ -32,7 +33,8 @@ data class SendMailConfig(
         carbonCopyRecipients = "",
         invisibleCarbonCopyRecipients = "",
         attachmentFilename = "",
-        job = null
+        body = "",
+        workflow = null
     )
 
 }
