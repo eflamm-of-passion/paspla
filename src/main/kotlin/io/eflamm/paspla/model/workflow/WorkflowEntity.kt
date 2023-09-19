@@ -1,7 +1,7 @@
 package io.eflamm.paspla.model.workflow
 
-import io.eflamm.paspla.model.action.httprequest.HttpRequestConfig
-import io.eflamm.paspla.model.action.sendmail.SendMailConfig
+import io.eflamm.paspla.model.action.httprequest.HttpRequestEntity
+import io.eflamm.paspla.model.action.sendmail.SendMailEntity
 import jakarta.persistence.*
 import java.util.*
 
@@ -16,11 +16,13 @@ data class WorkflowEntity(
     val uuid: UUID? = null,
     val name: String,
     val description: String,
+    @Column(name="is_enabled")
+    val isEnabled: Boolean = true,
 
     @OneToMany(mappedBy = "workflow", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val httpRequestActions: List<HttpRequestConfig> = mutableListOf(),
+    val httpRequestActions: List<HttpRequestEntity> = mutableListOf(),
     @OneToMany(mappedBy = "workflow", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val sendMailActions: List<SendMailConfig> = mutableListOf()
+    val sendMailActions: List<SendMailEntity> = mutableListOf()
 ) {
-    constructor() : this(null, null, "", "")
+    constructor() : this(null, null, "", "", false)
 }

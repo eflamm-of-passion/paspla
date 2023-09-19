@@ -2,9 +2,7 @@ package io.eflamm.paspla.controller
 
 import io.eflamm.paspla.exception.ResourceNotFoundException
 import io.eflamm.paspla.model.*
-import io.eflamm.paspla.model.action.httprequest.HttpRequestConfig
-import io.eflamm.paspla.model.action.httprequest.HttpRequestActionDTO
-import io.eflamm.paspla.model.action.httprequest.HttpRequestActionInsertDTO
+import io.eflamm.paspla.model.action.httprequest.*
 import io.eflamm.paspla.service.action.HttpRequestActionService
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info
@@ -33,7 +31,7 @@ class HttpRequestActionController {
     @GetMapping("/", produces = ["application/json"])
     fun getHttpRequestActions(): ResponseEntity<List<HttpRequestActionDTO>> {
         logger.info("GET /api/actions/http-request/ - request")
-        var actionsDTOs = mapToDto(httpRequestActionService.getAllActions())
+        var actionsDTOs = mapRequestsToDto(httpRequestActionService.getAllActions())
         logger.info("GET /api/actions/http-request/ - response 200 OK ")
         return ResponseEntity.status(HttpStatus.OK).body(actionsDTOs)
     }
@@ -41,7 +39,7 @@ class HttpRequestActionController {
     @PostMapping("/", consumes = ["application/json"], produces = ["application/json"])
     fun createAction(@RequestBody insertDTO: HttpRequestActionInsertDTO): ResponseEntity<HttpRequestActionDTO> {
         logger.info("POST /api/actions/http-request/ - request")
-        var createActionDTO =  mapToDto(httpRequestActionService.createAction(insertDTO))
+        var createActionDTO =  mapRequestToDto(httpRequestActionService.createAction(insertDTO))
         logger.info("POST /api/actions/http-request/ - response 200 OK")
         return ResponseEntity.status(HttpStatus.CREATED).body(createActionDTO)
     }
@@ -59,20 +57,32 @@ class HttpRequestActionController {
         }
     }
 
-    private fun mapToDto(entity: HttpRequestConfig): HttpRequestActionDTO {
+    private fun mapRequestToDto(requestEntity: HttpRequestEntity): HttpRequestActionDTO {
         return HttpRequestActionDTO(
-            uuid = entity.uuid,
-            rank = entity.rank,
-            url = entity.url,
-            httpVerb = entity.httpVerb,
-            queryParams = entity.queryParams,
-            headers = entity.headers,
-            body = entity.body,
-            workflowUuid = entity.workflow?.uuid
+            uuid = requestEntity.uuid,
+            rank = requestEntity.rank,
+            url = requestEntity.url,
+            httpVerb = requestEntity.httpVerb,
+            queryParams = requestEntity.queryParams,
+            headers = mapHeadersToDto(requestEntity.headers),
+            body = requestEntity.body,
+            workflowUuid = requestEntity.workflow?.uuid
         )
     }
 
-    private fun mapToDto(entities: List<HttpRequestConfig>): List<HttpRequestActionDTO> {
-        return entities.map { entity -> mapToDto(entity) }
+    private fun mapRequestsToDto(requestEntities: List<HttpRequestEntity>): List<HttpRequestActionDTO> {
+        return requestEntities.map { entity -> mapRequestToDto(entity) }
+    }
+
+    private fun mapHeaderToDto(headerEntity: HttpRequestHeaderEntity): HttpRequestHeaderDTO {
+        return HttpRequestHeaderDTO(
+            uuid = headerEntity.uuid,
+            key = headerEntity.key,
+            value = headerEntity.value
+        )
+    }
+
+    private fun mapHeadersToDto(headerEntities: List<HttpRequestHeaderEntity>): List<HttpRequestHeaderDTO> {
+        return headerEntities.map { entity -> mapHeaderToDto(entity) }
     }
 }

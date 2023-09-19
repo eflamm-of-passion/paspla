@@ -3,10 +3,10 @@ package io.eflamm.paspla.executor
 import io.eflamm.paspla.model.action.ActionData
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionInput
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionOutput
-import io.eflamm.paspla.model.action.httprequest.HttpRequestConfig
+import io.eflamm.paspla.model.action.httprequest.HttpRequestEntity
 import io.eflamm.paspla.model.action.sendmail.SendMailOutput
 
-var httpRequestMap : (config: HttpRequestConfig, data: ActionData) -> HttpRequestActionInput = {
+var httpRequestMap : (config: HttpRequestEntity, data: ActionData) -> HttpRequestActionInput = {
     config, output ->
         var createdInput : HttpRequestActionInput
         when(output) {

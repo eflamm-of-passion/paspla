@@ -2,12 +2,12 @@ package io.eflamm.paspla.executor
 
 import io.eflamm.paspla.model.action.ActionData
 import io.eflamm.paspla.model.action.httprequest.HttpRequestActionOutput
-import io.eflamm.paspla.model.action.sendmail.SendMailConfig
+import io.eflamm.paspla.model.action.sendmail.SendMailEntity
 import io.eflamm.paspla.model.action.sendmail.SendMailInput
 import io.eflamm.paspla.model.action.sendmail.SendMailInputAdapter
 import io.eflamm.paspla.model.action.sendmail.SendMailOutput
 
-var sendMailInputMap : (config: SendMailConfig, data: ActionData) -> SendMailInput = {
+var sendMailInputMap : (config: SendMailEntity, data: ActionData) -> SendMailInput = {
     config, data ->
         var createdSendMailInput : SendMailInput
         when(data) {

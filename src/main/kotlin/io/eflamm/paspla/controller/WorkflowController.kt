@@ -59,7 +59,7 @@ class WorkflowController {
     }
 
     private fun mapToDto(workflowEntity: WorkflowEntity): WorkflowDTO {
-        return WorkflowDTO(uuid = workflowEntity.uuid, name = workflowEntity.name, description = workflowEntity.description)
+        return WorkflowDTO(uuid = workflowEntity.uuid, name = workflowEntity.name, description = workflowEntity.description, isEnabled = workflowEntity.isEnabled)
     }
 
     private fun mapToDto(workflowEntities: List<WorkflowEntity>): List<WorkflowDTO> {

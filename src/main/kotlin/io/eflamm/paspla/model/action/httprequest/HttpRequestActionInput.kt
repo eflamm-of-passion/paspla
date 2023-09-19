@@ -6,6 +6,6 @@ open class HttpRequestActionInput(
     open val url: String,
     open val httpVerb: String,
     open val queryParams: String?,
-    open val headers: String?,
+    open val headers: List<HttpRequestHeaderEntity>,
     open val body: String?,
 ) : ActionData

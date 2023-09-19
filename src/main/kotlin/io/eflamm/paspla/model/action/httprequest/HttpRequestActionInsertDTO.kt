@@ -7,7 +7,7 @@ data class HttpRequestActionInsertDTO(
     val url: String,
     val httpVerb: String,
     val queryParams: String?,
-    val headers: String?,
+    val headers: List<HttpRequestHeaderInsertDTO>,
     val body: String?,
     val workflowUuid: UUID
 )

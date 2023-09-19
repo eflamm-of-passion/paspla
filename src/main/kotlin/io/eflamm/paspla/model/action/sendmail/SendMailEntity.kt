@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 @Table(name = "send_mail_actions")
-data class SendMailConfig(
+data class SendMailEntity(
     override val id: Long? = null,
     override val uuid: UUID? = null,
     override var rank: Int,

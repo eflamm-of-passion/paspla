@@ -7,13 +7,13 @@ data class HttpRequestActionInputAdapter(
     override val url: String,
     override val httpVerb: String,
     override val queryParams: String?,
-    override val headers: String?,
+    override val headers: List<HttpRequestHeaderEntity>,
     override val body: String?,
 ) : HttpRequestActionInput(url, httpVerb, queryParams, headers, body) {
 
     companion object {
         // design pattern : factory method
-        fun createInput(config: HttpRequestConfig, output: ActionData?): HttpRequestActionInput? {
+        fun createInput(config: HttpRequestEntity, output: ActionData?): HttpRequestActionInput? {
             var createdSendMailInput : HttpRequestActionInput? = null
             when(output) {
                 is HttpRequestActionOutput -> {

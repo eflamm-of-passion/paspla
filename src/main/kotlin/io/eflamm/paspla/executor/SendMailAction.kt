@@ -1,7 +1,7 @@
 package io.eflamm.paspla.executor
 
 import io.eflamm.paspla.model.action.ActionData
-import io.eflamm.paspla.model.action.sendmail.SendMailConfig
+import io.eflamm.paspla.model.action.sendmail.SendMailEntity
 import io.eflamm.paspla.model.action.sendmail.SendMailInput
 import io.eflamm.paspla.model.action.sendmail.SendMailOutput
 import org.slf4j.Logger
@@ -11,7 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender
 
 class SendMailActionExecutor
 
-var executeSendMailAction : (config: SendMailConfig, data: ActionData, mailSender: JavaMailSender, adapter: (config: SendMailConfig, data: ActionData) -> SendMailInput) -> ActionData =  {
+var executeSendMailAction : (config: SendMailEntity, data: ActionData, mailSender: JavaMailSender, adapter: (config: SendMailEntity, data: ActionData) -> SendMailInput) -> ActionData =  {
         config, data, mailSender, adapter ->
 
     val logger: Logger = LoggerFactory.getLogger(SendMailActionExecutor::class.java)

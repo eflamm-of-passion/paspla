@@ -38,3 +38,4 @@ out/
 
 # env file 
 deploy/dev/env.sh
+deploy/dev/insert_private_test_data.sql

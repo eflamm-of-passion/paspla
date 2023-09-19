@@ -5,5 +5,6 @@ import java.util.*
 data class WorkflowDTO(
     val uuid: UUID?,
     val name: String,
-    val description: String
+    val description: String,
+    val isEnabled: Boolean
 )

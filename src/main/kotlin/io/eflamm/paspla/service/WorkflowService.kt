@@ -3,8 +3,8 @@ package io.eflamm.paspla.service
 import io.eflamm.paspla.exception.ResourceNotFoundException
 import io.eflamm.paspla.executor.ActionProcessor
 import io.eflamm.paspla.model.action.ActionConfig
-import io.eflamm.paspla.model.action.httprequest.HttpRequestConfig
-import io.eflamm.paspla.model.action.sendmail.SendMailConfig
+import io.eflamm.paspla.model.action.httprequest.HttpRequestEntity
+import io.eflamm.paspla.model.action.sendmail.SendMailEntity
 import io.eflamm.paspla.model.workflow.WorkflowEntity
 import io.eflamm.paspla.model.workflow.WorkflowInsertDTO
 import io.eflamm.paspla.repository.WorkflowRepository
@@ -23,13 +23,13 @@ class WorkflowService {
     private lateinit var actionProcessor: ActionProcessor
 
     fun processWorkflows(){
-        var workflows = getAllWorkflows()
+        var workflows = getAllWorkflows().filter { it.isEnabled }.toList()
         workflows.forEach { workflow -> processWorkflow(workflow) }
     }
 
     fun processWorkflow(workflowEntity: WorkflowEntity) {
-        var httpActions: List<HttpRequestConfig> = workflowEntity.httpRequestActions
-        var mailActions: List<SendMailConfig> = workflowEntity.sendMailActions
+        var httpActions: List<HttpRequestEntity> = workflowEntity.httpRequestActions
+        var mailActions: List<SendMailEntity> = workflowEntity.sendMailActions
 
         var actions : List<ActionConfig> = httpActions.plus(mailActions)
 

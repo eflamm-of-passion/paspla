@@ -8,7 +8,7 @@ data class HttpRequestActionDTO(
     val url: String,
     val httpVerb: String,
     val queryParams: String?,
-    val headers: String?,
+    val headers: List<HttpRequestHeaderDTO>,
     val body: String?,
     var workflowUuid: UUID?
 )

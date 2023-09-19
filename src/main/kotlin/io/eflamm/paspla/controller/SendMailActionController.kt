@@ -2,7 +2,7 @@ package io.eflamm.paspla.controller
 
 import io.eflamm.paspla.exception.ResourceNotFoundException
 import io.eflamm.paspla.model.*
-import io.eflamm.paspla.model.action.sendmail.SendMailConfig
+import io.eflamm.paspla.model.action.sendmail.SendMailEntity
 import io.eflamm.paspla.model.action.sendmail.SendMailActionDTO
 import io.eflamm.paspla.model.action.sendmail.SendMailActionInsertDTO
 import io.eflamm.paspla.service.action.SendMailActionService
@@ -59,7 +59,7 @@ class SendMailActionController {
         }
     }
 
-    private fun mapToDto(entity: SendMailConfig): SendMailActionDTO {
+    private fun mapToDto(entity: SendMailEntity): SendMailActionDTO {
         return SendMailActionDTO(
             uuid = entity.uuid,
             rank = entity.rank,
@@ -72,7 +72,7 @@ class SendMailActionController {
         )
     }
 
-    private fun mapToDto(entities: List<SendMailConfig>): List<SendMailActionDTO> {
+    private fun mapToDto(entities: List<SendMailEntity>): List<SendMailActionDTO> {
         return entities.map { entity -> mapToDto(entity) }
     }
 }

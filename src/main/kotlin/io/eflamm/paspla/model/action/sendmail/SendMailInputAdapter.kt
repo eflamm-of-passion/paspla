@@ -14,7 +14,7 @@ data class SendMailInputAdapter(
 
     companion object {
         // design pattern : factory method
-        fun createInput(config: SendMailConfig, output: ActionData?): SendMailInput? {
+        fun createInput(config: SendMailEntity, output: ActionData?): SendMailInput? {
             var createdSendMailInput : SendMailInput? = null
             when(output) {
                 is HttpRequestActionOutput -> {
@@ -34,7 +34,7 @@ data class SendMailInputAdapter(
     /**
      * From an HTTP request action
      */
-    constructor(sendMailConfig: SendMailConfig, output: HttpRequestActionOutput): this(
+    constructor(sendMailConfig: SendMailEntity, output: HttpRequestActionOutput): this(
         sender = sendMailConfig.sender,
         recipients = sendMailConfig.recipients,
         carbonCopyRecipients = sendMailConfig.recipients,
@@ -49,7 +49,7 @@ data class SendMailInputAdapter(
     )
 
     // default
-    constructor(sendMailConfig: SendMailConfig): this(
+    constructor(sendMailConfig: SendMailEntity): this(
         sender = sendMailConfig.sender,
         recipients = sendMailConfig.recipients,
         carbonCopyRecipients = sendMailConfig.recipients,

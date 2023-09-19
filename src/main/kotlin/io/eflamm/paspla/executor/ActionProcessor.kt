@@ -3,8 +3,8 @@ package io.eflamm.paspla.executor
 import io.eflamm.paspla.model.action.ActionConfig
 import io.eflamm.paspla.model.action.ActionData
 import io.eflamm.paspla.model.action.EmptyData
-import io.eflamm.paspla.model.action.httprequest.HttpRequestConfig
-import io.eflamm.paspla.model.action.sendmail.SendMailConfig
+import io.eflamm.paspla.model.action.httprequest.HttpRequestEntity
+import io.eflamm.paspla.model.action.sendmail.SendMailEntity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Component
@@ -33,10 +33,10 @@ class ActionProcessor {
     fun processTheAccordingFunction(actionConfig: ActionConfig, previousOutputData: ActionData): ActionData {
         var data = previousOutputData
             when (actionConfig) {
-                is HttpRequestConfig -> {
+                is HttpRequestEntity -> {
                         data = executeHttpRequestAction(actionConfig, data, httpRequestMap)
                 }
-                is SendMailConfig -> {
+                is SendMailEntity -> {
                         data = executeSendMailAction(actionConfig, data, mailSender, sendMailInputMap)
                 }
                 else -> {
