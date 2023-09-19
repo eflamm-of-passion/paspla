@@ -39,7 +39,7 @@ springBoot {
 sonar {
 	properties {
 		property("sonar.projectKey", "Paspla")
-		property("sonar.token", "sqp_ca1bbc0b5cd2486430da93691cc5c71afd880a50")
+		property("sonar.token", System.getenv("SONAR_TOKEN"))
 	}
 }
 
